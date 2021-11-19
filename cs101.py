@@ -54,56 +54,79 @@ class TIC_TAC_TOE():
             self.board[index] = 'X'
             print("Wrong input, we will choose a random choice for you......." + str(index+1))
 
-    def validate_game_verdit(self):  # validate if we have a winner or it's a tie
-        if self.board[6] == "X" and self.board[7] == 'X' and self.board[8] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[6] == "O" and self.board[7] == 'O' and self.board[8] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[3] == "X" and self.board[4] == 'X' and self.board[5] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[3] == "O" and self.board[4] == 'O' and self.board[5] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[0] == "X" and self.board[1] == 'X' and self.board[2] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[0] == "O" and self.board[1] == 'O' and self.board[2] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[0] == "X" and self.board[3] == 'X' and self.board[6] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[0] == "O" and self.board[3] == 'O' and self.board[6] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[1] == "X" and self.board[4] == 'X' and self.board[7] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[1] == "O" and self.board[4] == 'O' and self.board[7] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[2] == "X" and self.board[5] == 'X' and self.board[8] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[2] == "O" and self.board[5] == 'O' and self.board[8] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[0] == "X" and self.board[4] == 'X' and self.board[8] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[0] == "O" and self.board[4] == 'O' and self.board[8] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[2] == "X" and self.board[4] == 'X' and self.board[6] == 'X':
-            self.end_game = 1
-            return "Bravo! You won!"
-        elif self.board[2] == "O" and self.board[4] == 'O' and self.board[6] == 'O':
-            self.end_game = 1
-            return "Sorry, you lost :("
-        elif self.board[0] == ' ' or self.board[1] == ' ' or self.board[2] == ' ' or self.board[3] == ' ' or self.board[
+    # def validate_game_verdit(self):  # validate if we have a winner or it's a tie
+    #     if self.board[6] == "X" and self.board[7] == 'X' and self.board[8] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[6] == "O" and self.board[7] == 'O' and self.board[8] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[3] == "X" and self.board[4] == 'X' and self.board[5] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[3] == "O" and self.board[4] == 'O' and self.board[5] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[0] == "X" and self.board[1] == 'X' and self.board[2] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[0] == "O" and self.board[1] == 'O' and self.board[2] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[0] == "X" and self.board[3] == 'X' and self.board[6] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[0] == "O" and self.board[3] == 'O' and self.board[6] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[1] == "X" and self.board[4] == 'X' and self.board[7] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[1] == "O" and self.board[4] == 'O' and self.board[7] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[2] == "X" and self.board[5] == 'X' and self.board[8] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[2] == "O" and self.board[5] == 'O' and self.board[8] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[0] == "X" and self.board[4] == 'X' and self.board[8] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[0] == "O" and self.board[4] == 'O' and self.board[8] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[2] == "X" and self.board[4] == 'X' and self.board[6] == 'X':
+    #         self.end_game = 1
+    #         return "Bravo! You won!"
+    #     elif self.board[2] == "O" and self.board[4] == 'O' and self.board[6] == 'O':
+    #         self.end_game = 1
+    #         return "Sorry, you lost :("
+    #     elif self.board[0] == ' ' or self.board[1] == ' ' or self.board[2] == ' ' or self.board[3] == ' ' or self.board[
+    #         4] == ' ' or self.board[5] == ' ' or self.board[6] == ' ' or self.board[7] == ' ' or self.board[8] == ' ':
+    #         self.end_game = 0
+    #         return "Next"
+    #     else:
+    #         self.end_game = 1
+    #         return 'Tie game'
+
+    def validate_game_verdit2(self):  # check if the game is over and return verdict
+        for line in self.lines:
+            lose = 0
+            win = 0
+            for index in line:
+                if self.board[index-1] == "X":
+                    win += 1
+                elif self.board[index-1] == 'O':
+                    lose += 1
+            if lose == 3:
+                self.end_game = 1
+                return "Sorry, you lost :( Try again!!"
+            elif win == 3:
+                self.end_game = 1
+                return "Yeah! You got it!! Bravo!"
+        if self.board[0] == ' ' or self.board[1] == ' ' or self.board[2] == ' ' or self.board[3] == ' ' or self.board[
             4] == ' ' or self.board[5] == ' ' or self.board[6] == ' ' or self.board[7] == ' ' or self.board[8] == ' ':
             self.end_game = 0
             return "Next"
@@ -210,13 +233,13 @@ if tic.starter is False:
 
 while tic.end_game == 0:
     tic.your_turn()
-    verdict = tic.validate_game_verdit()
+    verdict = tic.validate_game_verdit2()
     tic.print_board()
     if tic.end_game == 1:
         print(verdict)
         break
     tic.computer_turn()
-    verdict = tic.validate_game_verdit()
+    verdict = tic.validate_game_verdit2()
     tic.print_board()
     if tic.end_game == 1:
         print(verdict)
