@@ -1,7 +1,7 @@
 from random import randint, choice
 
 
-class TIC_TAC_TO():
+class TIC_TAC_TOE():
     def __init__(self):
         self.starter = False
         self.board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
@@ -12,15 +12,16 @@ class TIC_TAC_TO():
         self.first_question()
 
     def print_void_board(self):  # instructions on how to play the game
-        print("\nUse this pattern to play: \n")
+        print("Use this pattern to play: \n")
         print('7|8|9')
         print('-+-+-')
         print('4|5|6')
         print('-+-+-')
         print('1|2|3')
-        print("\nYou get the X's, computer gets the O's\n")
+        print("\nYou get the X's, computer gets the O's")
 
     def print_board(self):  # instructions on how to play the game
+        #print("\n")
         print(self.board[6] + '|' + self.board[7] + '|' + self.board[8])
         print('-+-+-')
         print(self.board[3] + '|' + self.board[4] + '|' + self.board[5])
@@ -116,7 +117,8 @@ class TIC_TAC_TO():
         self.print_board()
 
     def computer_turn(self):  # computer turn
-        print("\nComputer play:")
+        print("\n-------------------------------------------------")
+        print("Computer play:")
         self.computer_turn_completed = 0
         # can the computer win? If yes, close it
         self.computer_close_attack()
@@ -186,7 +188,23 @@ class TIC_TAC_TO():
                         self.computer_turn_completed = 1
                         break
 
-tic = TIC_TAC_TO()
+print('''
+=========================================================================================
+|           88                                                                          |
+|     ,d    ""              ,d                            ,d                            |
+|     88                    88                            88                            |
+|   MM88MMM 88  ,adPPYba, MM88MMM ,adPPYYba,  ,adPPYba, MM88MMM ,adPPYba,   ,adPPYba,   |  
+|     88    88 a8"     ""   88    ""     `Y8 a8"     ""   88   a8"     "8a a8P_____88   |
+|     88    88 8b           88    ,adPPPPP88 8b           88   8b       d8 8PP"""""""   |  
+|     88,   88 "8a,   ,aa   88,   88,    ,88 "8a,   ,aa   88,  "8a,   ,a8" "8b,   ,aa   |  
+|     "Y888 88  `"Ybbd8"'   "Y888 `"8bbdP"Y8  `"Ybbd8"'   "Y888 `"YbbdP"'   `"Ybbd8"'   |
+|                                                                                       |
+|                                                           by Martin Carrier, P. Eng.  |   
+=========================================================================================   
+''')
+
+
+tic = TIC_TAC_TOE()
 if tic.starter is False:
     tic.computer_first_turn()
 
