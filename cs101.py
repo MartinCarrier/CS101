@@ -1,11 +1,13 @@
-from random import randint
+from random import randint, choice
 
 
 class TIC_TAC_TO():
     def __init__(self):
         self.starter = False
         self.board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        self.computer_turn_completed = 0
         self.end_game = 0
+        self.lines = [[1, 5, 9], [3, 5, 7], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]] # 8 tic-tac-to lines
         self.print_void_board()
         self.first_question()
 
@@ -35,11 +37,21 @@ class TIC_TAC_TO():
     def your_turn(self):  # ask the player to provide input on next move
         print('\n*************************************************')
         temp = input('Your turn, choose a number between 1 and 9: ')
+        # check if it's numeric
+        while temp.isnumeric() is False or int(temp) not in range(1, 10):
+            temp = input('Your must enter numeric value between 1 and 9: ')
+
         if self.board[int(temp) - 1] == " " and int(temp) in range(1, 10):
             self.board[int(temp) - 1] = 'X'
             # return temp
         else:
-            print("Wrong input")
+            option = []
+            for i in range(0,9):
+                if self.board[i] == ' ':
+                    option.append(i)
+            index = choice(option)
+            self.board[index] = 'X'
+            print("Wrong input, we will choose a random choice for you......." + str(index+1))
 
     def validate_game_verdit(self):  # validate if we have a winner or it's a tie
         if self.board[6] == "X" and self.board[7] == 'X' and self.board[8] == 'X':
@@ -105,14 +117,74 @@ class TIC_TAC_TO():
 
     def computer_turn(self):  # computer turn
         print("\nComputer play:")
-        for i in range(0, 9):
-            if self.board[i] == " ":
-                self.board[i] = 'O'
-                break
+        self.computer_turn_completed = 0
+        # can the computer win? If yes, close it
+        self.computer_close_attack()
+        # if no, can the computer lose? If yes, defend
+        self.computer_defense_tactik()
+        # if no, try to make a good move...
+        self.computer_augment_chance()
+        # if no, play safe
+        self.play_safe()
 
-    def computer_tactik(self):  #give some algorithm to the computer
-        pass
+    def computer_defense_tactik(self):  # give some algorithm to the computer
+        # [1, 2, 3]
+        if self.computer_turn_completed == 0:
+            for item in self.lines:
+                count = 0
+                for nb in item:
+                    if self.board[nb-1] == 'X':
+                        count += 1
+                if count == 2:
+                    for nb in item:
+                        if self.board[nb - 1] == ' ' and self.computer_turn_completed == 0:
+                            self.board[nb - 1] = 'O'
+                            self.computer_turn_completed = 1
+                            break
 
+    def computer_close_attack(self):  # offensive move, if we can win, we close!
+        # first look if we can close and win
+        if self.computer_turn_completed == 0:
+            for line in self.lines:  # loop the lines
+                count = 0
+                for case in line:  # 3 cases
+                    if self.board[case-1] == 'O':
+                        count += 1
+                if count == 2:
+                    for case in line:
+                        if self.board[case-1] == ' ' and self.computer_turn_completed == 0:
+                            self.board[case - 1] = 'O'
+                            self.computer_turn_completed = 1
+
+    def computer_augment_chance(self):  # this function looks for a clear line with one '0'
+        if self.computer_turn_completed == 0:
+            for item in self.lines:
+                count = 0
+                for nb in item:
+                    if self.board[nb-1] == 'O':
+                        count += 1
+                if count == 1:  # that mean we should look at this line
+                    empty = 0
+                    empty_case = []
+                    for stuff in item:
+                        if self.board[stuff-1] == " ":
+                            empty_case.append(stuff)
+                            empty += 1
+                    if empty == 2 and self.computer_turn_completed == 0:
+                        self.board[choice(empty_case)-1] = 'O'
+                        self.computer_turn_completed = 1
+
+    def play_safe(self):
+        if self.computer_turn_completed == 0:
+            if self.board[4] == ' ':  # play in the center
+                self.board[4] = 'O'
+                self.computer_turn_completed = 1
+            else:
+                for i in range(8, -1, -1):
+                    if self.board[i] == " " and self.computer_turn_completed == 0:
+                        self.board[i] = 'O'
+                        self.computer_turn_completed = 1
+                        break
 
 tic = TIC_TAC_TO()
 if tic.starter is False:
